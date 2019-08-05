@@ -1,8 +1,5 @@
+# 리스트에서 첫번째와 마지막 값 구하기
 def solution(x):
-    # firstValue = x[0]
-    # lastValue = x[len(x)-1]
-    # answer = firstValue + lastValue
-
     if len(x) < 2 :
         return 0
     return x[0] + x[-1]
