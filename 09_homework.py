@@ -59,16 +59,47 @@ class LinkedList:
     def popAfter(self, prev):
         if prev.next == None:
             return None
-        if prev.next.next == None:
-            self.tail = prev.next
-        result = prev.next.data
-        prev.next = prev.next.next
-        return result
+        else:
+            curr = prev.next
+            nextNode = curr.next
+            prev.next = nextNode
+            if prev.next == None:
+                self.tail = prev
+            # print('head is %s' % self.head.next.data)
+            # print('tail is %s' % self.tail.data)
+            # print('nodeCount is %s' % self.nodeCount)
+            self.nodeCount -= 1
+            return curr.data
 
 
     def popAt(self, pos):
-        pass
+        #print('head is %s' % self.head.next.data)
+        #print('tail is %s' % self.tail.data)
+        # print('nodeCount is %s' % self.nodeCount)
+        if pos < 1 or pos >= self.nodeCount + 1:
+            raise IndexError
+
+        if pos != 1 and pos == self.nodeCount + 1:
+            prev = self.tail
+        else:
+            prev = self.getAt(pos - 1)
+        return self.popAfter(prev)
 
 
 def solution(x):
     return 0
+
+# Test case
+# a = Node(1)
+# b = Node(2)
+# c = Node(3)
+L = LinkedList()
+# L.insertAt(1, a)
+# L.insertAt(2, b)
+# L.insertAt(3, c)
+
+print(L.traverse())
+print(L.popAt(1))
+# print(L.traverse())
+# print(L.popAt(1))
+# print(L.traverse())
