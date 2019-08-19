@@ -51,40 +51,29 @@ class LinkedList:
 
 
     def popAt(self, pos):
-        
-        if pos < 1 or pos > self.nodeCount:
+        if pos < 0 or pos >= self.nodeCount + 1:
             raise IndexError
-            
+        
         if pos == 1:
-            result = None
-                
-            result = self.head.data
-            
-            self.head = self.head.next
+            currNode = self.head
+            self.head = currNode.next
             self.nodeCount -= 1
             if self.nodeCount < 2:
                 self.tail = None
-            print("head 11is {}".format(self.head.data))
-            print("tail 11is {}".format(self.tail.data))
-            print("nodeCount 11is {}".format(self.nodeCount))
-            return result
-        else:
-            if pos == self.nodeCount:
-                self.tail = self.getAt(pos-1)    
+            return currNode.data
+        elif pos == self.nodeCount:
             prev = self.getAt(pos-1)
-            target = prev.next
-            if target.next != None:
-                prev.next = target.next
-            else:
-                prev.next = None
+            currNode = prev.next
+            prev.next = None
+            self.tail = prev
             self.nodeCount -= 1
-            if self.nodeCount == 1:
-                self.tail = None
-            print("head 22is {}".format(self.head.data))
-            print("tail 22is {}".format(self.tail.data))
-            print("nodeCount 22is {}".format(self.nodeCount))
-            return target.data
-
+            return currNode.data
+        else:
+            prevNode = self.getAt(pos-1)
+            currNode = prevNode.next
+            prevNode.next = currNode.next
+            self.nodeCount -= 1
+            return currNode.data
 
     def traverse(self):
         result = []
@@ -92,6 +81,9 @@ class LinkedList:
         while curr is not None:
             result.append(curr.data)
             curr = curr.next
+        print('head is %s' % self.head.data)
+        print('tail is %s' % self.tail.data)
+        print('nodeCount is %s' % self.nodeCount)
         return result
 
 
@@ -108,6 +100,10 @@ L.insertAt(1, a)
 L.insertAt(2, b)
 L.insertAt(3, c)
 
-print(L.popAt(2))
-print(L.popAt(2))
+print(L.traverse())
 print(L.popAt(1))
+print(L.traverse())
+print(L.popAt(2))
+print(L.traverse())
+print(L.popAt(1))
+print(L.traverse())
