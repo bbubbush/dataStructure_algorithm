@@ -1,99 +1,143 @@
-class ArrayStack:
+class Node:
+
+    def __init__(self, item):
+        self.data = item
+        self.prev = None
+        self.next = None
+
+
+class DoublyLinkedList:
 
     def __init__(self):
-        self.data = []
+        self.nodeCount = 0
+        self.head = Node(None)
+        self.tail = Node(None)
+        self.head.prev = None
+        self.head.next = self.tail
+        self.tail.prev = self.head
+        self.tail.next = None
+
+
+    def __repr__(self):
+        if self.nodeCount == 0:
+            return 'LinkedList: empty'
+
+        s = ''
+        curr = self.head
+        while curr.next.next:
+            curr = curr.next
+            s += repr(curr.data)
+            if curr.next.next is not None:
+                s += ' -> '
+        return s
+
+
+    def getLength(self):
+        return self.nodeCount
+
+
+    def traverse(self):
+        result = []
+        curr = self.head
+        while curr.next.next:
+            curr = curr.next
+            result.append(curr.data)
+        return result
+
+
+    def reverse(self):
+        result = []
+        curr = self.tail
+        while curr.prev.prev:
+            curr = curr.prev
+            result.append(curr.data)
+        return result
+
+
+    def getAt(self, pos):
+        if pos < 0 or pos > self.nodeCount:
+            return None
+
+        if pos > self.nodeCount // 2:
+            i = 0
+            curr = self.tail
+            while i < self.nodeCount - pos + 1:
+                curr = curr.prev
+                i += 1
+        else:
+            i = 0
+            curr = self.head
+            while i < pos:
+                curr = curr.next
+                i += 1
+
+        return curr
+
+
+    def insertAfter(self, prev, newNode):
+        next = prev.next
+        newNode.prev = prev
+        newNode.next = next
+        prev.next = newNode
+        next.prev = newNode
+        self.nodeCount += 1
+        return True
+
+
+    def insertAt(self, pos, newNode):
+        if pos < 1 or pos > self.nodeCount + 1:
+            return False
+
+        prev = self.getAt(pos - 1)
+        return self.insertAfter(prev, newNode)
+
+
+    def popAfter(self, prev):
+        curr = prev.next
+        next = curr.next
+        prev.next = next
+        next.prev = prev
+        self.nodeCount -= 1
+        return curr.data
+
+
+    def popAt(self, pos):
+        if pos < 1 or pos > self.nodeCount:
+            raise IndexError('Index out of range')
+
+        prev = self.getAt(pos - 1)
+        return self.popAfter(prev)
+
+
+    def concat(self, L):
+        self.tail.prev.next = L.head.next
+        L.head.next.prev = self.tail.prev
+        self.tail = L.tail
+
+        self.nodeCount += L.nodeCount
+
+
+class LinkedListQueue:
+
+    def __init__(self):
+        self.data = DoublyLinkedList()
 
     def size(self):
-        return len(self.data)
+        return self.data.getLength()
 
     def isEmpty(self):
         return self.size() == 0
 
-    def push(self, item):
-        self.data.append(item)
+    def enqueue(self, item):
+        node = Node(item)
+        self.data.insertAt(self.size() + 1, node)
 
-    def pop(self):
-        return self.data.pop()
+    def dequeue(self):
+        return self.data.popAt(1)
 
     def peek(self):
-        return self.data[-1]
+        return self.data.getAt(1).data
 
 
-def splitTokens(exprStr):
-    tokens = []
-    val = 0
-    valProcessing = False
-    for c in exprStr:
-        if c == ' ':
-            continue
-        if c in '0123456789':
-            val = val * 10 + int(c)
-            valProcessing = True
-        else:
-            if valProcessing:
-                tokens.append(val)
-                val = 0
-            valProcessing = False
-            tokens.append(c)
-    if valProcessing:
-        tokens.append(val)
-
-    return tokens
-
-
-def infixToPostfix(tokenList):
-    prec = {
-        '*': 3,
-        '/': 3,
-        '+': 2,
-        '-': 2,
-        '(': 1,
-    }
-
-    opStack = ArrayStack()
-    postfixList = []
-    
-    for w in tokenList:
-        if w == '(':
-            opStack.push(w)
-        elif w == ')':
-            while opStack.peek() != '(':
-                postfixList.append(opStack.pop())
-            opStack.pop()
-        elif prec.get(w) == None:
-            postfixList.append(w)
-        else:
-            while not opStack.isEmpty() and prec.get(opStack.peek()) >= prec.get(w):
-                postfixList.append(opStack.pop())
-            opStack.push(w)
-    while not opStack.isEmpty():
-        postfixList.append(opStack.pop())
-    return postfixList
-
-
-def postfixEval(tokenList):
-    stack = ArrayStack()
-    prec =['+', '-', '*', '/']
-    for w in tokenList:
-        if not w in prec:
-            stack.push(w)
-        else:
-            second = stack.pop()
-            first = stack.pop()
-            if w == '+':
-                stack.push(first + second)
-            elif w == '-':
-                stack.push(first - second)
-            elif w == '*':
-                stack.push(first * second)
-            elif w == '/':
-                stack.push(first / second)
-    
-    return stack.pop()
-
-
-def solution(expr):
-    tokens = splitTokens(expr)
-    postfix = infixToPostfix(tokens)
-    val = postfixEval(postfix)
-    return val
+def solution(x):
+    return 0
