@@ -132,7 +132,7 @@ class PriorityQueue:
     def enqueue(self, x):
         newNode = Node(x)
         curr = self.queue.head
-        while curr.next != None and curr.next.data > x:
+        while curr.next.data != None and curr.next.data > x:
             curr = curr.next
         self.queue.insertAfter(curr, newNode)
         print(self.queue.traverse)
@@ -147,9 +147,11 @@ def solution(x):
     return 0
 
 p = PriorityQueue()
+p.enqueue(3)
+p.enqueue(2)
+p.enqueue(2)
+p.enqueue(3)
 p.enqueue(1)
-p.enqueue(2)
-p.enqueue(2)
-print(p.peek())
+
 print(p.dequeue())
-# print(p.dequeue())
+print(p.dequeue())
