@@ -84,7 +84,7 @@ class MaxHeap:
             self.data[i], self.data[smallest] = self.data[smallest], self.data[i]
             self.maxHeapify(smallest)
 
-
+# Class version
 class HeapSort:
     def __init__(self):
         self.heap = None
@@ -96,35 +96,49 @@ class HeapSort:
             self.heap = MinHeap()
         
         result = []
-        # insert to heap
         if len(arr) > 0:
+            # insert to heap
             for data in arr:
                 self.heap.insert(data)
+            # all data is pop in heap
             while self.heap.isEmpty() == False:
                 result.append(self.heap.remove())
             return result
         else:
             return arr
 
+# Function version
+def heapSort(arr, isDescending = False):
+    heap = None
+    if isDescending:
+        heap = MaxHeap()
+    else:
+        heap = MinHeap()
+    
+    result = []
+    if len(arr) > 0:
+        # insert to heap
+        for data in arr:
+            heap.insert(data)
+        # all data is pop in heap
+        while heap.isEmpty() == False:
+            result.append(heap.remove())
+        return result
+    else:
+        return arr      
         
-
-
 
 
 def solution(x):
     return 0
 
+
+# Class version
 s = HeapSort()
 paramArr = [3, 6, 10, 2, 9, 0]
 print(s.sort(paramArr, True))
 print(s.sort(paramArr, False))
-# heap = MinHeap()
-# heap.insert(1)
-# heap.insert(3)
-# heap.insert(5)
-# heap.insert(10)
 
-# print(heap.remove())
-# print(heap.remove())
-# print(heap.remove())
-# print(heap.remove())
+# Function version
+print(heapSort(paramArr, True))
+print(heapSort(paramArr, False))
