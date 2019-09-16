@@ -5,7 +5,7 @@ def solution(record):
         , 'L' : 'Leave'
         , 'C' : 'Change'}   # Can use Status
     userIdDic = {}  # User Id
-    splitData = [row.split(' ') for row in record];
+    splitData = [row.split(' ') for row in record]
     for data in splitData:
         status = data[0]
         userId = data[1]
