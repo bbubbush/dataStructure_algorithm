@@ -1,4 +1,4 @@
-[![junu](https://img.shields.io/static/v1?logo=GitHub&label=Cteator&message=Junu&color=blue)]()
+[![JuNu](https://img.shields.io/static/v1?logo=GitHub&label=Cteator&message=JuNu&color=blue)](https://github.com/mike6321)
 # dataStructure_algorithm
 자료구조 및 알고리즘 공부
 
