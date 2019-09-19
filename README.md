@@ -1,4 +1,7 @@
+[![SSinsa](https://img.shields.io/static/v1?logo=GitHub&label=Cteator&message=SSinsa&color=blue)](https://github.com/SSinsa)
+[![laziness](https://img.shields.io/static/v1?logo=GitHub&label=Cteator&message=laziness&color=blue)](https://github.com/sonwonrak92)
 [![JuNu](https://img.shields.io/static/v1?logo=GitHub&label=Cteator&message=JuNu&color=blue)](https://github.com/mike6321)
+[![bbubbush](https://img.shields.io/static/v1?logo=GitHub&label=Cteator&message=bbubbush&color=blue)](https://github.com/bbubbush)
 # dataStructure_algorithm
 자료구조 및 알고리즘 공부
 
