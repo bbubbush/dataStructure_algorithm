@@ -1,5 +1,7 @@
+[![junu](https://img.shields.io/static/v1?logo=GitHub&label=Cteator&message=Junu&color=blue)]()
 # dataStructure_algorithm
 자료구조 및 알고리즘 공부
+
 
 ## 1. Linear Array(선형배열)
 - 흔히 일반적으로 생각하는 Array(이하 배열)를 말하며, 별 다른 말이 없을 경우에는 동일한 데이터 타입의 집합으로 간주한다.
